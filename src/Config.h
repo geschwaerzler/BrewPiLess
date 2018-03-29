@@ -163,7 +163,7 @@
 #define WAKEUP_BUTTON 0
 #endif
 
-// default supports 2 buttions
+// default supports 2 buttons
 #ifndef BREWPI_BUTTONS
 #define BREWPI_BUTTONS 1
 #endif
@@ -207,6 +207,7 @@
 #define BrewShield 0
 #define Sonoff 1
 #define Thorrak_PCB 2
+#define Gebraeu_PCB_1 3
 
 #ifndef BOARD
 #define BOARD BrewShield
@@ -273,6 +274,45 @@
 #define doorPin    NODEMCU_PIN_D4
 #define BuzzPin NODEMCU_PIN_D0
 #define WakeupButtonPin NODEMCU_PIN_D3
+
+#elif BOARD == Gebraeu_PCB_1
+//override any defines so far that are fixed by the Gebraeu_PCB_1 configuration
+//1-wire sensors and actuators
+#define oneWirePin NODEMCU_PIN_D5  // If oneWirePin is specified, beerSensorPin and fridgeSensorPin are ignored
+#define coolingPin NODEMCU_PIN_D5
+#define heatingPin NODEMCU_PIN_D5
+#undef BREWPI_DS2413
+#define BREWPI_DS2413 1
+#undef BREWPI_EXTERNAL_SENSOR
+#define BREWPI_EXTERNAL_SENSOR 0
+#define BREWPI_SENSOR_PINS 0
+#define BREWPI_ACTUATOR_PINS 0
+//OLED LCD on I2C
+#undef BREWPI_LCD
+#define BREWPI_LCD 1
+#undef OLED_LCD
+#define OLED_LCD 1
+#undef PIN_SDA
+#define PIN_SDA NODEMCU_PIN_D7
+#undef PIN_SCL
+#define PIN_SCL NODEMCU_PIN_D6
+#define OLED128x64_LCD_ORIENTATION 1
+//rotary encoder on D2, D3, D4
+#undef ButtonViaPCF8574
+#define ButtonViaPCF8574 0
+#undef BREWPI_BUTTONS
+#define BREWPI_BUTTONS 0
+#undef BREWPI_ROTARY_ENCODER
+#define BREWPI_ROTARY_ENCODER 1
+#define rotaryAPin NODEMCU_PIN_D2
+#define rotaryBPin NODEMCU_PIN_D3
+#define rotarySwitchPin NODEMCU_PIN_D4
+//other settings
+#undef BREWPI_BUZZER
+#define BREWPI_BUZZER 0
+#define doorPin    NODEMCU_PIN_D0
+#define WakeupButtonPin NODEMCU_PIN_D0
+
 #else
 #error "unknown board"
 #endif
@@ -284,11 +324,11 @@
 #define BREWPI_OLED128x64_LCD 1
 #else
 #define BREWPI_IIC_LCD 1
-#endif
-#endif
-
 #define IIC_LCD_ADDRESS 0x27
 #define LCD_AUTO_ADDRESSING true
+#endif
+#endif //BREWPI_LCD
+
 
 #ifdef BREWPI_OLED128x64_LCD
 #define OLED128x64_LCD_ADDRESS 0x3c
@@ -327,7 +367,7 @@
 
 #if BREWPI_ROTARY_ENCODER
 
-#define RotaryViaPCF8574 1
+//#define RotaryViaPCF8574 1    //attention: RotaryViaPCF8574 preprocessing is controlled by #ifdef-s not by #if-s
 
 #ifdef RotaryViaPCF8574
 
@@ -340,10 +380,15 @@
 
 #else // #ifdef RotaryViaPCF8574
 
-#error "invalid setting"
+#ifndef rotaryAPin
 #define rotaryAPin NODEMCU_PIN_D3
+#endif
+#ifndef rotaryBPin
 #define rotaryBPin NODEMCU_PIN_D7
+#endif
+#ifndef rotarySwitchPin
 #define rotarySwitchPin NODEMCU_PIN_D4
+#endif
 
 #endif //#ifdef RotaryViaPCF8574
 
