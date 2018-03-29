@@ -290,6 +290,7 @@
 //OLED LCD on I2C
 #undef BREWPI_LCD
 #define BREWPI_LCD 1
+#define BREWPI_OLED_SH1106 1
 #undef OLED_LCD
 #define OLED_LCD 1
 #undef PIN_SDA
