@@ -305,7 +305,7 @@
 #define PIN_SDA NODEMCU_PIN_D7
 #undef PIN_SCL
 #define PIN_SCL NODEMCU_PIN_D6
-#define OLED128x64_LCD_ORIENTATION 1
+#define OLED128x64_LCD_ORIENTATION 0
 //rotary encoder on D2, D3, D4
 #undef ButtonViaPCF8574
 #define ButtonViaPCF8574 0
