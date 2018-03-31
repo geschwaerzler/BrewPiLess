@@ -1,6 +1,6 @@
     var BChart = {
         offset: 0,
-        url: 'chart.php',
+        url: 'http://brewpiless.local/chart.php',
         toggle: function(line) {
             this.chart.toggleLine(line);
         },
