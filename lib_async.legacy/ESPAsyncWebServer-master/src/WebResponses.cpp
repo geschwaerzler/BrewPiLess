@@ -125,6 +125,7 @@ String AsyncWebServerResponse::_assembleHead(uint8_t version){
       addHeader("Transfer-Encoding","chunked");
   }
   addHeader("Access-Control-Allow-Origin","http://localhost:8000");
+  addHeader("Vary","Origin");
   String out = String();
   int bufSize = 300;
   char buf[bufSize];
