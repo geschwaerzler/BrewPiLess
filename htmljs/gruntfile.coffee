@@ -11,8 +11,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-postcss'
   grunt.loadNpmTasks 'grunt-processhtml'
+  grunt.loadNpmTasks 'grunt-contrib-connect'
 
   grunt.initConfig
+
+    connect:
+      default:
+        options:
+          port: 8000
+          base: 'build'
 
     copy:
       jsfiles:

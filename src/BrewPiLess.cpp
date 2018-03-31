@@ -411,7 +411,10 @@ public:
 		        return request->requestAuthentication();
 
 	 		brewPi.putLine(data.c_str());
-	 		request->send(200,"application/json","{}");
+	 		//request->send(200,"application/json","{}");
+			AsyncWebServerResponse *response = request->beginResponse(200, "application/json", "{}");
+			response->addHeader("Access-Control-Allow-Origin","*");
+			request->send(response);
 	 	}
 		#endif
 		 /*else if(request->method() == HTTP_GET && request->url() == CONTROL_CC_PATH){
@@ -985,6 +988,7 @@ public:
 					return brewLogger.readVolatileData(buffer, maxLen,index);
 				});
 				response->addHeader("LogOffset",String(logoffset));
+				response->addHeader("Access-Control-Allow-Origin","*");
 				request->send(response);
 			}else{
 				request->send(204);
@@ -997,9 +1001,17 @@ public:
 
 			size_t size=brewLogger.beginCopyAfter(offset);
 			if(size >0){
-				request->send("application/octet-stream", size, [](uint8_t *buffer, size_t maxLen, size_t index) -> size_t {
-					return brewLogger.read(buffer, maxLen,index);
+				// request->send("application/octet-stream", size, [](uint8_t *buffer, size_t maxLen, size_t index) -> size_t {
+				// 	return brewLogger.read(buffer, maxLen,index);
+				// });
+
+				AsyncWebServerResponse *response = request->beginResponse("application/octet-stream", size,
+						[](uint8_t *buffer, size_t maxLen, size_t index) -> size_t {
+					return brewLogger.readVolatileData(buffer, maxLen,index);
 				});
+				response->addHeader("Access-Control-Allow-Origin","*");
+				request->send(response);
+
 			}else{
 				request->send(204);
 			}

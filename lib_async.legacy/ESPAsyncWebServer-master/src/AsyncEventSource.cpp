@@ -271,6 +271,7 @@ AsyncEventSourceResponse::AsyncEventSourceResponse(AsyncEventSource *server){
   _sendContentLength = false;
   addHeader("Cache-Control", "no-cache");
   addHeader("Connection","keep-alive");
+  addHeader("Access-Control-Allow-Origin","*");
 }
 
 void AsyncEventSourceResponse::_respond(AsyncWebServerRequest *request){
