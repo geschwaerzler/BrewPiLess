@@ -74,9 +74,9 @@
 //
 // Enable External temperature Sensor
 //
-// #ifndef BREWPI_EXTERNAL_SENSOR
- #define BREWPI_EXTERNAL_SENSOR true
-// #endif
+#ifndef BREWPI_EXTERNAL_SENSOR
+#define BREWPI_EXTERNAL_SENSOR true
+#endif
 //
 //////////////////////////////////////////////////////////////////////////
 
@@ -139,7 +139,6 @@
 #ifndef BREWPI_LCD
 #define BREWPI_LCD 1
 #endif
-
 //
 //////////////////////////////////////////////////////////////////////////
 
@@ -153,15 +152,15 @@
 
 //////////////////////////////////////////////////////////////////////////
 //
-// #ifndef BREWPI_ROTARY_ENCODER
+#ifndef BREWPI_ROTARY_ENCODER
 #define BREWPI_ROTARY_ENCODER 0
-// #endif
+#endif
 //
 //////////////////////////////////////////////////////////////////////////
 
-// default supports 2 buttions
+// default supports 2 buttons
 #ifndef BREWPI_BUTTONS
-#define  BREWPI_BUTTONS 1
+#define BREWPI_BUTTONS 1
 #endif
 
 #ifndef ButtonViaPCF8574 
@@ -201,7 +200,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 //
-// Board Definitoin
+// Board Definition
 //
 // 
 #define BrewShield 0
@@ -214,13 +213,14 @@
 
 //////////////////////////////////////////////////////////////////////////
 //
-// Pin Configuration - Change the below to match your individual pinout
+// Pin Configuration - Change the settings below to match your individual pinout
 //
 // pins
 
 #define NODEMCU_PIN_A0 17	// Analog
 
-#define NODEMCU_PIN_D0 16	// No interrupt, do not use for rotary encoder
+#define NODEMCU_PIN_D0 16	// No interrupt, do not use for rotary encoder,
+                            // Also controlls 2nd LED on NodeMCU board
 #define NODEMCU_PIN_D1 5	// Generally used for I2C
 #define NODEMCU_PIN_D2 4	// Generally used for I2C
 #define NODEMCU_PIN_D3 0
@@ -251,10 +251,10 @@
 #endif
 // NO LCD, NO BUTTONs
 #define BREWPI_LCD false
+#undef BREWPI_MENU
 #define BREWPI_MENU 0
 #undef  BREWPI_BUTTONS 
 #define  BREWPI_BUTTONS 0
-
 
 #elif BOARD == Thorrak_PCB
 #define oneWirePin NODEMCU_PIN_D6  // If oneWirePin is specified, beerSensorPin and fridgeSensorPin are ignored
@@ -302,7 +302,19 @@
 #ifdef BREWPI_OLED128x64_LCD
 #define OLED128x64_LCD_ADDRESS 0x3c
 #define STATUS_LINE 1
+//////////////////////////////////////////////////////////////////////////
+//
+// OLED orientation
+// 1: flipScreenVertically() will be called on init,
+//    resulting in a 180° rotation. This is the default.
+// 0: flipScreenVertically() will be omitted
+//
+#ifndef OLED128x64_LCD_ORIENTATION
+#define OLED128x64_LCD_ORIENTATION 1
 #endif
+/////////////////////////////////////////////////////////////////////////
+
+#endif //BREWPI_OLED128x64_LCD
 
 
 //#if BREWPI_ROTARY_ENCODER  || BREWPI_BUTTONS
