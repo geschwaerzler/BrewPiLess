@@ -123,6 +123,10 @@ module.exports = (grunt) ->
         files: [
           'build/index.html': ['src/index.html']
           'build/control.html': ['src/control.html']
+          'build/logging.html': ['src/logging.html']
+          'build/setup.html': ['src/setup.html']
+          'build/config.html': ['src/config.html']
+          'build/gravity.html': ['src/gravity.html']
         ]
 
     watch:

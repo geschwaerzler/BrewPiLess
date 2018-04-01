@@ -1,5 +1,10 @@
 var JSVERSION = "2.7";
 
+function restUrl(resource) {
+//    return resoure;
+    return "http://brewpiless.local".concat(resource);
+}
+
 function s_ajax(b) {
     var c = new XMLHttpRequest();
     c.onreadystatechange = function() {
