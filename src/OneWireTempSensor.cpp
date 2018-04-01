@@ -26,6 +26,7 @@
 #include "PiLink.h"
 #include "Ticks.h"
 #include "TemperatureFormats.h"
+#include "DeviceManager.h"
 
 OneWireTempSensor::~OneWireTempSensor(){
 	delete sensor;
@@ -42,8 +43,7 @@ bool OneWireTempSensor::init(){
 	// save address and pinNr for log messages
 	char addressString[17];
 	printBytes(sensorAddress, 8, addressString);
-	// TODO - fix the following to use the defined OneWire pin
-	DEBUG_ONLY(uint8_t pinNr = oneWire->pinNr());
+	DEBUG_ONLY(uint8_t pinNr = deviceManager.enumOneWirePins(0));
 
 	bool success = false;
 

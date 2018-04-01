@@ -29,9 +29,9 @@
 // 1: is typical debug messages required for end users
 // 2-3: more verbose debug messages
 //
-// #ifndef BREWPI_DEBUG
-// #define BREWPI_DEBUG 1
-// #endif
+#ifndef BREWPI_DEBUG
+#define BREWPI_DEBUG 2
+#endif
 //
 //////////////////////////////////////////////////////////////////////////
 
