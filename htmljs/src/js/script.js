@@ -1,6 +1,6 @@
     var BChart = {
         offset: 0,
-        url: 'http://brewpiless.local/chart.php',
+        url: restUrl('/chart.php'),
         toggle: function(line) {
             this.chart.toggleLine(line);
         },
@@ -258,7 +258,7 @@
         if (tzoff != tmoff || Math.abs(tm - time) > 10) {
             // update time & timezone
             s_ajax({
-                url: "time",
+                url: restUrl("/time"),
                 m: "POST",
                 mime: "application/x-www-form-urlencoded",
                 data: "time=" + tm + "&off=" + tmoff,

@@ -55,7 +55,7 @@ var BWF = {
         var b = this;
         invoke({
             m: "POST",
-            url: "http://brewpiless.local/putline",
+            url: restUrl("/putline"),
             mime: "application/x-www-form-urlencoded",
             data: "data=" + encodeURI(data),
             success: function() { if (typeof opt.success !== "undefined") opt.success(); },
@@ -68,7 +68,7 @@ var BWF = {
     reconnecting: false,
     connect: function() {
         var b = this;
-        var es = new EventSource("http://brewpiless.local/getline");
+        var es = new EventSource(restUrl("/getline"));
         es.onmessage = function(e) {
             b.process(e.data);
         };
@@ -110,7 +110,7 @@ var BWF = {
     save: function(file, data, success, fail) {
         invoke({
             m: "POST",
-            url: "http://brewpiless.local/fputs",
+            url: restUrl("/fputs"),
             data: "path=" + file + "&content=" + encodeURIComponent(data),
             success: function() { success(); },
             fail: function(e) { fail(e); }
