@@ -29,9 +29,9 @@
 // 1: is typical debug messages required for end users
 // 2-3: more verbose debug messages
 //
-// #ifndef BREWPI_DEBUG
-// #define BREWPI_DEBUG 2
-// #endif
+#ifndef BREWPI_DEBUG
+#define BREWPI_DEBUG 2
+#endif
 //
 //////////////////////////////////////////////////////////////////////////
 
@@ -287,6 +287,8 @@
 //override any defines so far that are fixed by the Gebraeu_PCB_1 configuration
 //1-wire sensors and actuators
 #define oneWirePin NODEMCU_PIN_D5  // If oneWirePin is specified, beerSensorPin and fridgeSensorPin are ignored
+#define coolingPin NODEMCU_PIN_D5
+#define heatingPin NODEMCU_PIN_D5
 #undef BREWPI_DS2413
 #define BREWPI_DS2413 1
 #undef BREWPI_EXTERNAL_SENSOR
