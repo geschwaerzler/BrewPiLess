@@ -13,7 +13,6 @@ var devices = {
             g = window.owContainer.cloneNode(true);
             g.querySelector("span.device-address").innerHTML = f.a;
             g.querySelector("span.device-channel").innerHTML = f.n;
-            g.querySelector("span.debug").innerHTML = JSON.stringify(f);
             g.querySelector("select.device-pintype").value = f.x;
             g.querySelector("span.device-value").innerHTML = (typeof f.v === "undefined") ? "-" : ((f.v) ? "active" : "inactive")
         } else {
